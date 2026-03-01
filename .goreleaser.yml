@@ -11,18 +11,7 @@ builds:
     goarch:
       - amd64
       - arm64
-    main: ./main.go
-
-archives:
-  - id: apkpure
-    name_template: "apkpure_{{ .Os }}_{{ .Arch }}"
-    formats: ["tar.gz", "zip"]
-    format_overrides:
-      - goos: windows
-        formats: ["zip"]
-      - goos: darwin
-        formats: ["tar.gz"]
-    
+    formats: ["tar.gz"]
 release:
   # GitHub 릴리즈 설정
   github:
