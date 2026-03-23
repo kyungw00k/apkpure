@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/kyungw00k/apkpure-go/pkg/apkpure"
+	"github.com/kyungw00k/apkpure/pkg/apkpure"
 )
 
 func main() {

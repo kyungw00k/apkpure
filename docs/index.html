@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>apkpure - CLI tool to download APK files from APKPure</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --surface: #161b22;
+      --border: #30363d;
+      --green: #3fb950;
+      --code-bg: #1c2128;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+    header { text-align: center; padding: 3rem 0 2rem; }
+    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    header p { color: var(--muted); font-size: 1.1rem; }
+    .demo { margin: 2rem 0; text-align: center; }
+    .demo img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    section { margin: 2.5rem 0; }
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .install-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .install-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .install-card h3 {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+    code { font-family: inherit; color: var(--accent); }
+    pre code { color: var(--fg); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th { color: var(--muted); font-weight: 600; }
+    td code { color: var(--green); background: none; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>apkpure</h1>
+      <p>CLI tool to download APK files from APKPure</p>
+    </header>
+
+    <div class="demo">
+      <img src="demo.gif" alt="apkpure CLI demo">
+    </div>
+
+    <section>
+      <h2>Installation</h2>
+      <div class="install-grid">
+        <div class="install-card">
+          <h3>Homebrew</h3>
+          <pre><code>brew install kyungw00k/cli/apkpure</code></pre>
+        </div>
+        <div class="install-card">
+          <h3>Go</h3>
+          <pre><code>go install github.com/kyungw00k/apkpure/cmd/apkpure@latest</code></pre>
+        </div>
+        <div class="install-card">
+          <h3>Shell script</h3>
+          <pre><code>curl -fsSL https://kyungw00k.dev/apkpure/install.sh | sh</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Features</h2>
+      <div class="features">
+        <div class="feature">Download APK files from APKPure</div>
+        <div class="feature">List available versions for apps</div>
+        <div class="feature">Download specific versions</div>
+        <div class="feature">Parallel downloads</div>
+        <div class="feature">Progress tracking</div>
+        <div class="feature">CSV batch processing</div>
+        <div class="feature">Architecture selection</div>
+        <div class="feature">Cross-platform (macOS, Linux, Windows)</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Quick Start</h2>
+      <pre><code># Download the latest version of an app
+apkpure -a com.instagram.android /path/to/output
+
+# Download a specific version
+apkpure -a com.instagram.android@150.0.0.0 /path/to/output
+
+# List available versions
+apkpure -l -a com.instagram.android
+
+# Download from a CSV file
+apkpure -c apps.csv /path/to/output
+
+# Parallel downloads with 8 workers
+apkpure -c apps.csv -r 8 /path/to/output</code></pre>
+    </section>
+
+    <section>
+      <h2>CLI Options</h2>
+      <table>
+        <tr><th>Flag</th><th>Description</th><th>Default</th></tr>
+        <tr><td><code>-a, --app</code></td><td>App ID</td><td></td></tr>
+        <tr><td><code>-c, --csv</code></td><td>CSV file containing app IDs</td><td></td></tr>
+        <tr><td><code>-f, --field</code></td><td>CSV field number for app IDs</td><td><code>1</code></td></tr>
+        <tr><td><code>-v, --version-field</code></td><td>CSV field number for versions</td><td></td></tr>
+        <tr><td><code>-l, --list-versions</code></td><td>List available versions</td><td></td></tr>
+        <tr><td><code>-o, --options</code></td><td>Additional options</td><td></td></tr>
+        <tr><td><code>-r, --parallel</code></td><td>Number of parallel downloads</td><td><code>4</code></td></tr>
+        <tr><td><code>-s, --sleep-duration</code></td><td>Sleep between downloads (ms)</td><td><code>0</code></td></tr>
+        <tr><td><code>-V, --version</code></td><td>Show version</td><td></td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Download Options</h2>
+      <p>Use <code>-o</code> to specify additional options (comma-separated):</p>
+      <table>
+        <tr><th>Option</th><th>Description</th><th>Example</th></tr>
+        <tr><td><code>arch</code></td><td>Architecture</td><td><code>arm64-v8a</code></td></tr>
+        <tr><td><code>language</code></td><td>Language code</td><td><code>ko-KR</code></td></tr>
+        <tr><td><code>os_ver</code></td><td>Android OS version</td><td><code>35</code></td></tr>
+        <tr><td><code>output_format</code></td><td>Output format for list</td><td><code>json</code></td></tr>
+      </table>
+      <pre><code>apkpure -a com.instagram.android -o arch=arm64-v8a,language=ko-KR /output</code></pre>
+    </section>
+
+    <footer>
+      <p>
+        <a href="https://github.com/kyungw00k/apkpure">GitHub</a> &middot;
+        MIT License &middot;
+        Go port of <a href="https://github.com/EFForg/apkeep">apkeep</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -37,7 +37,7 @@ clean:
 # Usage: make install
 #        PREFIX=/usr/local make install (to install to /usr/local/bin)
 install: build
-	@echo "📦 Installing apkpure-go..."
+	@echo "📦 Installing apkpure..."
 	@INSTALL_DIR=$${PREFIX:-$$HOME/.local/bin}; \
 	mkdir -p $$INSTALL_DIR; \
 	cp bin/apkpure $$INSTALL_DIR/apkpure; \

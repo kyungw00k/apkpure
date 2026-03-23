@@ -41,7 +41,7 @@ brews:
       owner: kyungw00k
       name: homebrew-cli
       token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
-    homepage: "https://github.com/kyungw00k/apkpure-go"
+    homepage: "https://github.com/kyungw00k/apkpure"
     description: "CLI tool to download APK files from APKPure"
     license: "MIT"
     install: |
@@ -52,7 +52,7 @@ brews:
 release:
   github:
     owner: kyungw00k
-    name: apkpure-go
+    name: apkpure
   draft: false
   prerelease: auto
   name_template: "v{{.Version}}"

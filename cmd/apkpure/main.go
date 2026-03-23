@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kyungw00k/apkpure-go/pkg/apkpure"
+	"github.com/kyungw00k/apkpure/pkg/apkpure"
 )
 
 var Version = "dev"

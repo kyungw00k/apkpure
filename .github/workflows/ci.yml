@@ -70,6 +70,6 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: apkpure-go-ubuntu-latest-go1.25
+        name: apkpure-ubuntu-latest-go1.25
         path: bin/apkpure
         retention-days: 7
