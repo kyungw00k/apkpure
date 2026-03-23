@@ -19,17 +19,10 @@ This project is a Go port of the APKPure functionality from [apkeep](https://git
 ### As a CLI tool (via Homebrew)
 
 ```bash
-# Tap and install
-brew tap kyungw00k/apkpure-go
-brew install apkpure
-
-# Or install directly without tapping
-brew install kyungw00k/apkpure-go/apkpure
+brew install kyungw00k/cli/apkpure
 ```
 
 ### As a CLI tool (via Go)
-
-### As a CLI tool
 
 ```bash
 go install github.com/kyungw00k/apkpure-go/cmd/apkpure@latest

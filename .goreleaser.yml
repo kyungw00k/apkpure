@@ -1,68 +1,58 @@
-# GoReleaser configuration
 version: 2
 
+project_name: apkpure
+
+before:
+  hooks:
+    - go mod tidy
+    - go test ./...
+
 builds:
-  - id: apkpure
+  - main: ./cmd/apkpure
     binary: apkpure
-    dir: ./cmd/apkpure
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+      - -X main.Version={{.Version}}
     goos:
       - linux
       - darwin
+      - windows
     goarch:
       - amd64
       - arm64
 
 archives:
-  - id: apkpure
-    format: tar.gz
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  use: github-native
+
+brews:
+  - repository:
+      owner: kyungw00k
+      name: homebrew-cli
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    homepage: "https://github.com/kyungw00k/apkpure-go"
+    description: "CLI tool to download APK files from APKPure"
+    license: "MIT"
+    install: |
+      bin.install "apkpure"
+    test: |
+      assert_match "apkpure version", shell_output("#{bin}/apkpure -V")
 
 release:
   github:
     owner: kyungw00k
     name: apkpure-go
-  
-  footer: |
-    ## 📦 Downloads
-    
-    ### Pre-built Binaries
-    - **Linux (amd64)**: `apkpure-go_linux_amd64.tar.gz`
-    - **Linux (arm64)**: `apkpure-go_linux_arm64.tar.gz`
-    - **macOS (amd64)**: `apkpure-go_darwin_amd64.tar.gz`
-    - **macOS (arm64)**: `apkpure-go_darwin_arm64.tar.gz`
-    
-    ## 📋 Full Changelog
-    
-    See the [full changelog](https://github.com/kyungw00k/apkpure-go/compare/{{ .PreviousTag }}...{{ .Tag }}) for all changes.
-    
-    ---
-    
-    **Note**: This release is compatible with Go 1.25+
-
-changelog:
-  use: github
-  sort: asc
-  format: "{{.SHA}}: {{.Message}}"
-  abbrev: 7
-  filters:
-    exclude:
-      - '^docs:'
-      - '^test:'
-      - '^ci:'
-      - '^build:'
-      - '^chore:'
-  groups:
-    - title: "🚀 Features"
-      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
-      order: 0
-    - title: "🐛 Bug Fixes"
-      regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
-      order: 1
-    - title: "🔧 Improvements"
-      regexp: '^.*?(refactor|perf|style)(\([[:word:]]+\))??!?:.+$'
-      order: 2
-    - title: "📚 Documentation"
-      regexp: '^.*?docs(\([[:word:]]+\))??!?:.+$'
-      order: 3
-    - title: "🔨 Build & CI"
-      regexp: '^.*?(build|ci|chore)(\([[:word:]]+\))??!?:.+$'
-      order: 4
+  draft: false
+  prerelease: auto
+  name_template: "v{{.Version}}"

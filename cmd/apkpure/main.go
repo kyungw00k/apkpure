@@ -12,16 +12,19 @@ import (
 	"github.com/kyungw00k/apkpure-go/pkg/apkpure"
 )
 
+var Version = "dev"
+
 var (
-	appID         string
-	csvFile       string
-	fieldNum      int
-	versionField  int
-	listVersions  bool
-	options       string
-	parallel      int
-	sleepDuration int64
-	outPath       string
+	appID          string
+	csvFile        string
+	fieldNum       int
+	versionField   int
+	listVersions   bool
+	showVersion    bool
+	options        string
+	parallel       int
+	sleepDuration  int64
+	outPath        string
 )
 
 func init() {
@@ -41,10 +44,17 @@ func init() {
 	flag.IntVar(&parallel, "parallel", 4, "Number of parallel downloads (alias for -r)")
 	flag.Int64Var(&sleepDuration, "s", 0, "Sleep duration between downloads in milliseconds")
 	flag.Int64Var(&sleepDuration, "sleep-duration", 0, "Sleep duration (alias for -s)")
+	flag.BoolVar(&showVersion, "V", false, "Show version")
+	flag.BoolVar(&showVersion, "version", false, "Show version (alias for -V)")
 }
 
 func main() {
 	flag.Parse()
+
+	if showVersion {
+		fmt.Printf("apkpure version %s\n", Version)
+		os.Exit(0)
+	}
 
 	// Get output path from remaining args
 	args := flag.Args()
