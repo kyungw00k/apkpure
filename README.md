@@ -125,6 +125,15 @@ See the [project page](https://kyungw00k.dev/apkpure/) for full documentation.
 
 See the [examples](examples/) directory for more usage examples.
 
+## Claude Code Skill
+
+AI 에이전트가 apkpure를 자동으로 활용할 수 있는 Claude Code 스킬이 제공됩니다.
+
+```
+/plugin marketplace add kyungw00k/skills
+/plugin install cli-tools@kyungw00k-skills
+```
+
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
